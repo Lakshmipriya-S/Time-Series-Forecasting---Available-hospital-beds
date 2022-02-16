@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block content %}
+
+ <div class="homeimg">
+     <img src="/static/image/bed2.jpeg" alt="Hospital Bed" style="width: 50%">
+ </div>
+ <div class="home">
+    <div class="form">
+        <h3>Please enter the number days, you would like to forecast the number of Available beds in the hospital</h3>
+        <form action="{{url_for('predict')}}" method="POST">
+        <input type="number" name="x" min="2" max="31">
+        <input type="submit" value="forecast">
+        </form>
+     </div>
+ </div>       
+ 
+       
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+{% block content %}
+
+<br><h2>Forecasting the Number of Available Beds for {{l-1}} days </h2><br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+<canvas id="myChart" style="width:80%;height:300px"></canvas>
+
+<script id="scriptchart">
+var xValues = {{dates | safe}};
+var yValues = {{beds | safe}};
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    
+  }
+});
+</script>
+
+
+<br>
+
+<table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Dates</th>
+                <th>Predicted value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for x in range (0, l) %}
+                <tr>
+                  <td>{{dates[x]}}</td>
+                  <td>{{beds[x]}}</td>
+                
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+{% endblock %}     
